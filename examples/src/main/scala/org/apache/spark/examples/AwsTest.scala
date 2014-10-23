@@ -24,7 +24,7 @@ object AwsTest {
   def main(args: Array[String]) {
     val (ak, sk, in, out) = args match {
       case Array(ak, sk, in, out) ? (ak, sk, in, out)
-      case _ ? sys.error("Usage: AwsTest AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY s3://INPUT s3://OUTPUT")
+      case _ => sys.error("Usage: AwsTest AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY s3://INPUT s3://OUTPUT")
     }
 
     val sparkConf = new SparkConf().setAppName("AwsTest")
