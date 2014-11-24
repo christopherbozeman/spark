@@ -936,7 +936,8 @@ class PairRDDFunctions[K, V](self: RDD[(K, V)])
     // TODO: Should we uncomment this for Scala 2.10?
     // conf.setOutputFormat(outputFormatClass)
     hadoopConf.set("mapred.output.format.class", outputFormatClass.getName)
-    //2014-11-18 Bozeman - force disabling multipart upload at this time until EMR multipart handling with Spark is improved
+    //2014-11-18 Bozeman - force disabling multipart upload at this time 
+    //      until EMR multipart handling with Spark is improved
     hadoopConf.set("fs.s3n.multipart.uploads.enabled", "false")
     for (c <- codec) {
       hadoopConf.setCompressMapOutput(true)
