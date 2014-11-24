@@ -40,7 +40,7 @@ while (($#)); do
 done
 
 DEFAULT_PROPERTIES_FILE="$SPARK_HOME/conf/spark-defaults.conf"
-export SPARK_SUBMIT_DEPLOY_MODE=${SPARK_SUBMIT_DEPLOY_MODE:-"client"}
+export SPARK_SUBMIT_DEPLOY_MODE=${SPARK_SUBMIT_DEPLOY_MODE:-"cluster"}
 export SPARK_SUBMIT_PROPERTIES_FILE=${SPARK_SUBMIT_PROPERTIES_FILE:-"$DEFAULT_PROPERTIES_FILE"}
 
 # For client mode, the driver will be launched in the same JVM that launches
