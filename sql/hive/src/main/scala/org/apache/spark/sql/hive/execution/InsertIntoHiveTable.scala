@@ -127,6 +127,9 @@ case class InsertIntoHiveTable(
       fileSinkConf.setCompressType(conf.get("mapred.output.compression.type"))
     }
 
+    //2014-12-08 Bozeman - force disabling multipart upload at this time until EMR multipart handling with Spark is improved
+    conf.set("fs.s3n.multipart.uploads.enabled", "false")
+
     // Use configured output committer if already set
     if (conf.getOutputCommitter == null) {
       conf.setOutputCommitter(classOf[FileOutputCommitter])
