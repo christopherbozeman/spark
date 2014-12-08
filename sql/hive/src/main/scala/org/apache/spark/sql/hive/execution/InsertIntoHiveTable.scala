@@ -126,7 +126,12 @@ case class InsertIntoHiveTable(
       fileSinkConf.setCompressCodec(conf.get("mapred.output.compression.codec"))
       fileSinkConf.setCompressType(conf.get("mapred.output.compression.type"))
     }
-    conf.setOutputCommitter(classOf[FileOutputCommitter])
+
+    // Use configured output committer if already set
+    if (conf.getOutputCommitter == null) {
+      conf.setOutputCommitter(classOf[FileOutputCommitter])
+    }
+
     FileOutputFormat.setOutputPath(
       conf,
       SparkHiveHadoopWriter.createPathFromString(fileSinkConf.getDirName, conf))
