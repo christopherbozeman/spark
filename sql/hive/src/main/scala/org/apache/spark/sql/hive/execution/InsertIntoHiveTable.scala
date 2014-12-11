@@ -72,6 +72,10 @@ case class InsertIntoHiveTable(
     val outputFileFormatClassName = fileSinkConf.getTableInfo.getOutputFileFormatClassName
     assert(outputFileFormatClassName != null, "Output format class not set")
     conf.value.set("mapred.output.format.class", outputFileFormatClassName)
+    //2014-12-08 Bozeman - force disabling multipart upload at this time 
+    //  until EMR multipart handling with Spark is improved
+    conf.value.set("fs.s3n.multipart.uploads.enabled", "false")
+
 
     // Use configured output committer if already set
     if (conf.value.getOutputCommitter == null) {
