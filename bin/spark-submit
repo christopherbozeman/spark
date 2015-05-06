@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# SPARK-6491 changed how Spark builds the classpath, if the classpath is already set (as can be the case if wrapped in an EMR step)
+# this may bring in the wrong jars; so unset the variable and let Spark build it from scratch
+unset CLASSPATH
+
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
