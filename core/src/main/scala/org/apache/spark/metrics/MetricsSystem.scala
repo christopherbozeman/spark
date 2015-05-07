@@ -128,7 +128,10 @@ private[spark] class MetricsSystem private (
 
     if (instance == "driver" || instance == "executor") {
       if (appId.isDefined && executorId.isDefined) {
-        MetricRegistry.name(appId.get, executorId.get, source.sourceName)
+        MetricRegistry.name(
+               appId.get.replaceAll("<","").replaceAll(">",""), 
+               executorId.get.replaceAll("<","").replaceAll(">",""),
+               source.sourceName)
       } else {
         // Only Driver and Executor set spark.app.id and spark.executor.id.
         // Other instance types, e.g. Master and Worker, are not related to a specific application.
