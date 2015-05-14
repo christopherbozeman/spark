@@ -15,6 +15,8 @@
 # limitations under the License.
 #
 
+unset CLASSPATH
+
 # included in all the spark scripts with source command
 # should not be executable directly
 # also should not be passed any arguments, since we need original $*
