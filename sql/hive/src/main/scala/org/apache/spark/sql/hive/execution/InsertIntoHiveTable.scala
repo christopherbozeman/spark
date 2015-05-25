@@ -74,6 +74,17 @@ case class InsertIntoHiveTable(
     assert(outputFileFormatClassName != null, "Output format class not set")
     conf.value.set("mapred.output.format.class", outputFileFormatClassName)
 
+    // Use configured output committer if already set
+    if (conf.value.getOutputCommitter == null) {
+      conf.value.setOutputCommitter(classOf[FileOutputCommitter])
+    }
+    else {
+      log.warn("OutputCommitter already set as " + 
+           conf.value.getOutputCommitter.getClass().getName() +
+           "; Support for speculative execution dependent on capabilities of committer")
+    }
+
+
     FileOutputFormat.setOutputPath(
       conf.value,
       SparkHiveWriterContainer.createPathFromString(fileSinkConf.getDirName, conf.value))
