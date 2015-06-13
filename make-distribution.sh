@@ -237,6 +237,14 @@ if [ -d "$SPARK_HOME"/R/lib/SparkR ]; then
   cp -r "$SPARK_HOME/R/lib/SparkR" "$DISTDIR"/R/lib
 fi
 
+#Extra jars for classpath provided by dist
+mkdir -p "$DISTDIR/classpath"
+mkdir -p "$DISTDIR/classpath/distsupplied"
+#jackson 2.4.4
+wget -O "$DISTDIR/classpath/distsupplied/jackson-annotations-2.4.4.jar" "http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.4.4/jackson-annotations-2.4.4.jar"
+wget -O "$DISTDIR/classpath/distsupplied/jackson-core-2.4.4.jar" "http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.4.4/jackson-core-2.4.4.jar"
+wget -O "$DISTDIR/classpath/distsupplied/jackson-databind-2.4.4.jar" "http://central.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.4.4/jackson-databind-2.4.4.jar"
+
 # Download and copy in tachyon, if requested
 if [ "$SPARK_TACHYON" == "true" ]; then
   TMPD=`mktemp -d 2>/dev/null || mktemp -d -t 'disttmp'`
